@@ -35,7 +35,7 @@ CytronMD motor2(PWM_DIR, 9, 10); // PWM 2 = Pin 9, DIR 2 = Pin 10.
 
 // The setup routine runs once when you press reset.
 void setup() {
-  pinMode(switch_socket,INPUT);
+  pinMode(switch_socket,INPUT_PULLUP);
 }
 
 
