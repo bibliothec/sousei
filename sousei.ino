@@ -19,7 +19,7 @@
  * Arduino GND - Motor Driver GND
  *
  *
- * AUTHOR   : rune
+ * AUTHOR   : bibliothec
  *
  *******************************************************************************/
 
@@ -47,10 +47,17 @@ void loop() {
   float input_volt,motor_speed;
 
   analog_val=analogRead(volume_socket);
-  input_volt=float(analog_val)*(5.0/1023.0);
+  input_volt=float(analog_val)*(5.0/1023.0); 
   
-  motor_speed=default_motor_speed*input_volt;             //write motor speed formula
-  
+  motor_speed=default_motor_speed*input_volt;   //write motor speed formula
+
+  Serial.print(analog_val);
+  Serial.print(" : ");
+  Serial.print(input_volt);
+  Serial.print(" V ");
+  Serial.print("motorspeed : ");
+  Serial.println(motor_speed);
+    
   if(digitalRead(switch_socket)==1){
     delay(interval);
     motor1.setSpeed(motor_speed);    
