@@ -30,7 +30,7 @@ CytronMD motor1(PWM_DIR, 3, 4);  // PWM 1 = Pin 3, DIR 1 = Pin 4.
 CytronMD motor2(PWM_DIR, 9, 10); // PWM 2 = Pin 9, DIR 2 = Pin 10.
 
  int interval=100;  // for chattering prevention
- int switch_socket=10; 
+ int switch_socket=11; 
  int volume_socket=0;
  float default_motor_speed=32.0;
 
