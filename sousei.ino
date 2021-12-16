@@ -29,17 +29,16 @@
 CytronMD motor1(PWM_DIR, 3, 4);  // PWM 1 = Pin 3, DIR 1 = Pin 4.
 CytronMD motor2(PWM_DIR, 9, 10); // PWM 2 = Pin 9, DIR 2 = Pin 10.
 
- int interval=100;  // for chattering prevention
+ int interval=1000;  // for chattering prevention
  int switch_socket=11; 
  int volume_socket=0;
- float default_motor_speed=32.0;
+ float default_motor_speed=255.0;
 
 // The setup routine runs once when you press reset.
 void setup() {
   Serial.begin(9600);
   pinMode(switch_socket,INPUT_PULLUP);
 }
-
 
 // The loop routine runs over and over again forever.
 void loop() {
@@ -49,22 +48,23 @@ void loop() {
   analog_val=analogRead(volume_socket);
   input_volt=float(analog_val)*(5.0/1023.0); 
   
-  motor_speed=default_motor_speed*input_volt;   //write motor speed formula
+  motor_speed=default_motor_speed*input_volt+100;   //write motor speed formula
 
   Serial.print(analog_val);
   Serial.print(" : ");
   Serial.print(input_volt);
-  Serial.print(" V ");
+  Serial.println(" V ");
+  Serial.print("default_motor_speed:");
+  Serial.println(default_motor_speed);
   Serial.print("motorspeed : ");
   Serial.println(motor_speed);
-    
+   
+// change motor direction of rotation
   if(digitalRead(switch_socket)==1){
     delay(interval);
     motor1.setSpeed(motor_speed);    
-    motor2.setSpeed(motor_speed);    
   }else if(digitalRead(switch_socket)==0){
     delay(interval);
     motor1.setSpeed(motor_speed*-1);    
-    motor2.setSpeed(motor_speed*-1);  
   }
 }
